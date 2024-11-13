@@ -3,6 +3,7 @@
 
 ## Project Structure
 The project is organized as follows:
+```
 MY BANKING WORLD (MBW)
 ├── main.py                   # Main entry point to run the application
 ├── config
@@ -27,3 +28,4 @@ MY BANKING WORLD (MBW)
 ├── utils                     # Utility functions and helper modules for common operations
 └── views
     └── account_ui.py         # User interface logic for account operations and interactions
+```
