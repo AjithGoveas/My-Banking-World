@@ -5,3 +5,4 @@ class Current(Account):
         super().__init__(name, balance, pin_number, privilege)
         self.registration_number=registration_number
         self.wwebsite_url=website_url
+        self.account_type = "current"

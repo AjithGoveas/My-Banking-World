@@ -14,19 +14,22 @@ class AccountUI:
             print('3.Withdraw Funds')
             print('4.Deposit Funds')
             print('5.Transfer Funds')
+            print('6.View Account By Type')
             print('9.Exit')
             choice=int(input("Enter your choice:"))
-            if choice==1:
+            if choice == 1:
                 self.open_account()
-            elif choice==2:
+            elif choice == 2:
                 self.close_account()
-            elif choice==3:
+            elif choice == 3:
                 self.withdraw_funds()
-            elif choice==4:
+            elif choice == 4:
                 self.deposit_funds()
-            elif choice==5:
+            elif choice == 5:
                 self.transfer_funds()
-            elif choice==9:
+            elif choice == 6:
+                self.view_account_by_type()
+            elif choice == 9:
                 break
             else:
                 print('Invalid Choice. Please try again')
@@ -118,5 +121,26 @@ class AccountUI:
         else:
             print("One or Both Account(s) Not Found. Please try again.")
 
-    
-    
+    def view_account_by_type(self):
+        # Available types are defined
+        available_types = ["savings", "current"]
+        print("Available account types: ", ", ".join(available_types))
+        
+        # Take user input for account type
+        # account_type = input("Enter the account type to view (savings/current): ").strip().lower()
+        account_type = input("Enter the account type to view: ").strip().lower()
+
+        # Validate the input
+        if account_type not in available_types:
+            print("Invalid account type. Please enter 'savings' or 'current'.")
+            return
+        
+        # Filter account by type 
+        filtered_accounts = next((account for account in AccountRepository.accounts if account.account_type == account_type), None)
+        
+        if filtered_accounts:
+            print(f"Accounts of type '{account_type}':")
+            for account in filtered_accounts:
+                print(account)  
+        else:
+            print(f"No accounts found for type '{account_type}'.")
