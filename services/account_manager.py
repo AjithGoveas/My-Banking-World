@@ -25,7 +25,7 @@ class AccountManager:
         AccountRepository.save_account(new_account)
         return new_account
      
-    def check_account_active(self,account):
+    def check_account_active(self, account):
         if not account.is_active:
             raise AccountNotActiveException('Account is not Active')
     

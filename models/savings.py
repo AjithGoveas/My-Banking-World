@@ -5,4 +5,6 @@ class Savings(Account):
         self.date_of_birth=date_of_birth
         self.gender=gender
         self.account_type = "savings"  
-    
+
+    def __str__(self):
+        return f"Name: {self.name}, Balance: {self.balance}, Privilege: {self.privilege}"

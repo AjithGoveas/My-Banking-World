@@ -124,7 +124,7 @@ class AccountUI:
     def view_account_by_type(self):
         # Available types are defined
         available_types = ["savings", "current"]
-        print("Available account types: ", ", ".join(available_types))
+        print("Available account types:", ", ".join(available_types))
         
         # Take user input for account type
         # account_type = input("Enter the account type to view (savings/current): ").strip().lower()
@@ -136,7 +136,7 @@ class AccountUI:
             return
         
         # Filter account by type 
-        filtered_accounts = next((account for account in AccountRepository.accounts if account.account_type == account_type), None)
+        filtered_accounts = [account for account in AccountRepository.accounts if account.account_type == account_type]
         
         if filtered_accounts:
             print(f"Accounts of type '{account_type}':")
