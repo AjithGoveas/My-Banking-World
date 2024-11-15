@@ -18,7 +18,8 @@ class AccountUI:
             print('3. Withdraw Funds')
             print('4. Deposit Funds')
             print('5. Transfer Funds')
-            print('8. Account Settings')
+            print('7. Account Settings')
+            print('8. Transaction History')
             print('9. Exit')
 
             choice = int(input('Enter your choice: '))
@@ -33,8 +34,10 @@ class AccountUI:
                 self.deposit_funds()
             elif choice == 5:
                 self.transfer_funds()
-            elif choice == 8:
+            elif choice == 7:
                 self.account_settings()
+            elif choice == 8:
+                self.transaction_history()
             elif choice == 9:
                 break
             else:
@@ -157,3 +160,12 @@ class AccountUI:
             self.edit_account_details()
         elif edit_type == 'toggle':
             self.toggle_account_status()
+
+    def transaction_history(self):
+        choice = input("Enter 'type' to view transactions by type, 'date' to view transactions by account with date range, or press Enter to view all: ").strip().lower()
+        if choice == "type":
+            TransactionManager.view_transactions_by_type()
+        elif choice == "date":
+            TransactionManager.view_transactions_by_account_and_date_range()
+        else:
+            TransactionManager.display_transactions()

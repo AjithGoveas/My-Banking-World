@@ -14,3 +14,6 @@ class TransferLimitExceededException(Exception):
 
 class AccountDoesNotExistsException(Exception):
     pass
+
+class InvalidTransactionTypeException(Exception):
+    pass
