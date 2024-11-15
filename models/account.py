@@ -11,3 +11,6 @@ class Account:
         self.privilege = privilege
         self.is_active = True
         self.closed_date = None
+
+    def __str__(self):
+        return f"Account(ID: {self.account_number}, Type: {self.account_type}, Balance: {self.balance}, Name: {self.name}, Active: {self.is_active})"

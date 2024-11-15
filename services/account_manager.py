@@ -68,15 +68,15 @@ class AccountManager:
             raise AccountNotActiveException('Account is already Deactivated')
         
 
-    # def view_account(self, account_repository, account_type=None, account_id=None, pin_number=None):
+    # def view_account(self, account_type=None, account_id=None, pin_number=None):
     #         if account_type:
-    #             accounts = [acc for acc in account_repository.get_all_accounts() if acc.type == account_type]
+    #             accounts = [acc for acc in AccountRepository().get_accounts() if acc.type == account_type]
     #             for account in accounts:
     #                 self.check_account_active(account)  # Check if each account is active
     #             return accounts
 
     #         elif account_id:
-    #             account = account_repository.get_account_by_id(account_id)
+    #             account = AccountRepository().get_account_by_id(account_id)
     #             if account:
     #                 self.check_account_active(account)  # Ensure the account is active
     #                 if pin_number is not None:  # If a PIN is provided, validate it
@@ -87,10 +87,28 @@ class AccountManager:
 
     #         else:
     #             # View all accounts if no filter is provided
-    #             accounts = account_repository.get_all_accounts()
+    #             accounts = AccountRepository().get_accounts()
     #             for account in accounts:
     #                 self.check_account_active(account)
     #             return accounts
+
+    def view_account(self, account_type=None, account_id=None):
+        if account_type:
+            accounts = [acc for acc in AccountRepository().get_accounts() if acc.type == account_type]
+            if not accounts:  # Check if the list is empty
+                raise AccountDoesNotExistsException(f"No accounts of type '{account_type}' found.")
+            return accounts
+        elif account_id:
+            account = AccountRepository().get_account_by_id(account_id)
+            if account:
+                return account
+            else:
+                raise AccountDoesNotExistsException("Account ID not found.")
+        else:
+            accounts = AccountRepository().get_accounts()
+            if not accounts:  # Check if no accounts exist
+                raise AccountDoesNotExistsException("No accounts found.")
+            return accounts
 
     def set_account_status(self, account_id, active):
         account = AccountRepository().get_account_by_id(account_id)

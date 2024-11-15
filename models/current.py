@@ -6,3 +6,6 @@ class Current(Account):
         super().__init__(name, balance, pin_number, privilege)
         self.registration_number = registration_number
         self.website_url = website_url
+
+    def __str__(self):
+        return f"Current Account(ID: {self.account_number}, Balance: {self.balance}, Active: {self.is_active})"

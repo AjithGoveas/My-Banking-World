@@ -18,6 +18,7 @@ class AccountUI:
             print('3. Withdraw Funds')
             print('4. Deposit Funds')
             print('5. Transfer Funds')
+            print('6. Display Accounts')
             print('8. Account Settings')
             print('9. Exit')
 
@@ -33,6 +34,8 @@ class AccountUI:
                 self.deposit_funds()
             elif choice == 5:
                 self.transfer_funds()
+            elif choice == 6:
+                self.display_account()
             elif choice == 8:
                 self.account_settings()
             elif choice == 9:
@@ -157,3 +160,26 @@ class AccountUI:
             self.edit_account_details()
         elif edit_type == 'toggle':
             self.toggle_account_status()
+
+    def display_account(manager):
+        try:
+            choice = input("Enter 'type' to view by type, 'id' to view by ID, or press Enter to view all: ").strip().lower()
+            if choice == "type":
+                account_type = input("Enter account type (Savings/Current): ").strip()
+                accounts = AccountManager().view_account(account_type=account_type)
+            elif choice == "id":
+                account_id = input("Enter account ID: ").strip()
+                account = AccountManager().view_account(account_id=account_id)
+                print(account)  # Single account (not a list)
+                return
+            else:
+                accounts = AccountManager().view_account()
+
+            # Display account details for multiple accounts
+            if accounts:
+                for account in accounts:
+                    print(account)
+            else:
+                print("No accounts found.")
+        except AccountDoesNotExistsException as e:
+            print(str(e))
