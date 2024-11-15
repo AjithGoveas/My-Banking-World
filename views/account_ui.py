@@ -3,8 +3,12 @@
 from services.account_manager import AccountManager
 from services.transaction_manager import TransactionManager
 from repositories.account_repository import AccountRepository
+from exceptions.exceptions import *
 
 class AccountUI:
+    def __init__(self):
+        self.account_repository = AccountRepository()
+
     def start(self):
         while True:
             print('\nWelcome to Global Digital Bank')
@@ -14,6 +18,7 @@ class AccountUI:
             print('3. Withdraw Funds')
             print('4. Deposit Funds')
             print('5. Transfer Funds')
+            print('8. Account Settings')
             print('9. Exit')
 
             choice = int(input('Enter your choice: '))
@@ -28,6 +33,8 @@ class AccountUI:
                 self.deposit_funds()
             elif choice == 5:
                 self.transfer_funds()
+            elif choice == 8:
+                self.account_settings()
             elif choice == 9:
                 break
             else:
@@ -121,3 +128,32 @@ class AccountUI:
                 print('Error: ', e)
         else:
             print('One or Both Account(s) Not Found. Please try again')
+
+    def toggle_account_status(self):
+        account_id = int(input("Enter the account ID: ").strip())
+        status = input("Enter 'activate' to activate or 'inactivate' to deactivate: ").strip().lower()
+        active = (status == "activate")
+        AccountManager().set_account_status(account_id, active)
+        print(f"Account {account_id} {'activated' if active else 'inactivated'}.") 
+
+    def edit_account_details(self):
+        # self.manager = AccountManager()
+        account_id = int(input("Enter the account ID: ").strip())
+        account = AccountRepository().get_account_by_id(account_id)
+        if account.is_active:
+            existing_pin_number = int(input('Enter your existing pin number: '))
+            new_pin_number = int(input('Enter your new pin number: '))
+            # name = input('Enter your name: ')
+            AccountManager().set_account_details(account_id,new_pin=new_pin_number,current_pin=existing_pin_number)
+            print(f"Account {account_id} details updated successfully.")
+            self.account_repository.get_account_by_id(account_id)
+        else:
+            print("Account not active.")
+
+    def account_settings(self):
+        edit_type = input("Enter 'edit' for edit account details or 'toggle' for toggle account status : ").strip().lower()
+
+        if edit_type == 'edit':
+            self.edit_account_details()
+        elif edit_type == 'toggle':
+            self.toggle_account_status()

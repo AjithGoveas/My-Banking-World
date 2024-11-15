@@ -11,3 +11,6 @@ class InvalidPinException(Exception):
 
 class TransferLimitExceededException(Exception):
     pass
+
+class AccountDoesNotExistsException(Exception):
+    pass
