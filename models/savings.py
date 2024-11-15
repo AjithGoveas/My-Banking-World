@@ -1,10 +1,8 @@
+#Savings.py
 from models.account import Account
-class Savings(Account):
-    def __init__(self,name,balance,date_of_birth,gender,pin_number,privilege):
-        super().__init__(name,balance,pin_number,privilege)
-        self.date_of_birth=date_of_birth
-        self.gender=gender
-        self.account_type = "savings"  
 
-    def __str__(self):
-        return f"Name: {self.name}, Balance: {self.balance}, Privilege: {self.privilege}"
+class Savings(Account):
+    def __init__(self, name, balance, date_of_birth, gender, pin_number, privilege):
+        super().__init__(name, balance, pin_number, privilege)
+        self.date_of_birth = date_of_birth
+        self.gender = gender

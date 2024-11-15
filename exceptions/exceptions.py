@@ -1,3 +1,5 @@
+# exceptions.py
+
 class AccountNotActiveException(Exception):
     pass
 

@@ -1,5 +1,7 @@
+# AccountRepository.py
+   
 class AccountRepository:
-    # Class attributes to store all accounts and the account counter
+    # Class attribute to store all the elements
     accounts = []
     account_counter = 1000
 
@@ -9,11 +11,11 @@ class AccountRepository:
         cls.account_counter += 1
         return cls.account_counter
 
-    # Method to save an account
+    # Method to save Account
     @classmethod
     def save_account(cls, account):
         cls.accounts.append(account)
-    
+
     # Method to get all accounts
-    def get_all_accounts(self):
+    def get_accounts(self):
         return self.accounts
