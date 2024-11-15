@@ -9,7 +9,7 @@ class TransactionManager:
 
     @staticmethod
     def get_current_timestamp():
-        return datetime.datetime.now()
+        return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     @classmethod
     def log_transaction(cls, account_number, amount, transaction_type, to_account_number=None):
@@ -18,7 +18,7 @@ class TransactionManager:
             'amount': amount,
             'transaction_type': transaction_type,
             'date' : cls.get_current_timestamp(),
-            'to-account_number': to_account_number
+            'to_account_number': to_account_number
         }
         cls.transaction_log.append(transaction_record)
 
@@ -86,14 +86,14 @@ class TransactionManager:
                     transactions = json.load(file)
                     print("\nTransaction Log:")
                     for transaction in transactions:
-                      print("-" * 40) 
-                      print("Account Number:", transaction['account_number'])
-                      print("Amount:", transaction['amount'])
-                      print("Transaction Type:", transaction['transaction_type'])
-                      print("Date:", transaction['date'])
-                    if transaction['to_account_number']:
-                        print("To Account Number:", transaction['to_account_number'])
-                    print("-" * 40)  
+                        print("-" * 40) 
+                        print("Account Number:", transaction['account_number'])
+                        print("Amount:", transaction['amount'])
+                        print("Transaction Type:", transaction['transaction_type'])
+                        print("Date:", transaction['date'])
+                        if transaction['to_account_number']:
+                            print("To Account Number:", transaction['to_account_number'])
+                        print("-" * 40)  
             except (json.JSONDecodeError, IOError):
                 print("Error reading the transaction file.")
         else:
