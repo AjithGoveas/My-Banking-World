@@ -80,6 +80,7 @@ class AccountUI:
             try:
                 AccountManager().close_account(account)
                 print('Account closed successfully')
+                account.is_active = False
             except Exception as e:
                 print("Error: ", e)
         else:
